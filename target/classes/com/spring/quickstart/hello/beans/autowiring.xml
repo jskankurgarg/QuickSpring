@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--  made below beans as primary to avoid ambiguity between fileWriter, fileWriter1 and consoleWriter, consoleWriter1 for by-type autowiring -->
+	<bean id="fileWriter1" class="com.spring.quickstart.autowiring.FileWriter"
+		primary="true">
+	</bean>
+	<bean id="consoleWriter1" class="com.spring.quickstart.autowiring.ConsoleWriter"
+		primary="true">
+	</bean>
+	
+	<!-- autowire-by-Type works only when the bean class has no-arg constructor 
+		+ setter() -->
+	<bean id="typeLogger" class="com.spring.quickstart.autowiring.Logger"
+		autowire="byType">
+	</bean>
+
+	<!-- autowire-by-constructor requires no-arg OR default constructor, parameterized 
+		constructor -->
+	<bean id="constructorLogger" class="com.spring.quickstart.autowiring.Logger"
+		autowire="constructor">
+	</bean>
+
+	<bean id="fileWriter" class="com.spring.quickstart.autowiring.FileWriter">
+	</bean>
+	<bean id="consoleWriter" class="com.spring.quickstart.autowiring.ConsoleWriter">
+	</bean>
+
+	<!-- by-name autowiring strictly depends on comparision between bean ID & reference variable name in the actual class-->
+	<bean id="nameLogger" class="com.spring.quickstart.autowiring.Logger"
+		autowire="byName">
+	</bean>
+
+	<!-- Uses no-arg constructor -->
+	<bean id="noLogger" class="com.spring.quickstart.autowiring.Logger"
+		autowire="no"></bean>
+
+	<!--  uses no-arg constructor -->
+	<bean id="defaultLogger" class="com.spring.quickstart.autowiring.Logger"
+		autowire="default">
+	</bean>
+
+</beans>

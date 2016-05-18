@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-init-method="init" default-destroy-method="destroy"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="apple" class="com.spring.quickstart.apps.Fruit"
+		factory-bean="fruitFactory" factory-method="createFruit" scope="singleton">
+		<constructor-arg name="name" type="String" value="apple"></constructor-arg>
+	</bean>
+	<bean id="banana" class="com.spring.quickstart.apps.Fruit">
+		<constructor-arg name="name" type="String" value="Banaaanaaaaa">
+		</constructor-arg>
+	</bean>
+	<bean id="mango" class="com.spring.quickstart.apps.Fruit">
+		<property name="name" value="Mango"></property>
+	</bean>
+	<bean id="fruitFactory" class="com.spring.quickstart.apps.FruitFactory">
+	</bean>
+
+	<bean id="orange" class="com.spring.quickstart.apps.Fruit" p:name="orange" />
+
+	<bean id="fruitBasket1" class="com.spring.quickstart.apps.FruitBasket">
+		<constructor-arg name="owner" type="String" value="Ravi"></constructor-arg>
+
+		<property name="basket">
+			<list>
+				<ref bean="apple" />
+				<ref bean="mango" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="fruitBasket2" class="com.spring.quickstart.apps.FruitBasket">
+		<property name="owner" value="RajBharath"></property>
+		<property name="basket">
+			<set>
+				<ref bean="banana" />
+				<ref bean="orange" />
+				<ref bean="banana" />
+				<null></null>
+			</set>
+		</property>
+	</bean>
+	<bean id="fruitBasket3" class="com.spring.quickstart.apps.FruitBasket">
+		<constructor-arg name="owner" type="String" value="Bhaiyaji"></constructor-arg>
+		<property name="basket">
+			<list>
+				<bean id="pineapple" class="com.spring.quickstart.apps.Fruit">
+					<constructor-arg name="name" type="String" value="pineapple"></constructor-arg>
+				</bean>
+				<bean id="kiwi" class="com.spring.quickstart.apps.Fruit">
+					<constructor-arg name="name" type="String" value="kiwi">
+					</constructor-arg>
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="food" class="com.spring.quickstart.apps.Food">
+		<constructor-arg>
+			<map>
+				<entry key="Ramu" value-ref="apple"></entry>
+				<entry key="Shyam" value-ref="banana"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>
